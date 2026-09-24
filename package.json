@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "set NODE_OPTIONS=--max-old-space-size=4096&& vite",
     "serve": "pnpm dev",
-    "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=8192 vite build",
+    "build": "rimraf dist && cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "build:staging": "rimraf dist && vite build --mode staging",
     "report": "rimraf dist && vite build",
     "preview": "vite preview",
@@ -19,7 +19,9 @@
     "lint:stylelint": "stylelint --cache --fix \"**/*.{html,vue,css,scss}\" --cache-location node_modules/.cache/stylelint/",
     "lint": "pnpm lint:eslint && pnpm lint:prettier && pnpm lint:stylelint",
     "prepare": "husky",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "deploy": "pnpm build && gh-pages -d dist",
+    "build:github": "rimraf dist && cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build --mode githubpages"
   },
   "keywords": [
     "pure-admin-thin",
@@ -94,11 +96,13 @@
     "@vitejs/plugin-vue-jsx": "^5.1.1",
     "boxen": "^8.0.1",
     "code-inspector-plugin": "^1.2.10",
+    "cross-env": "^10.1.0",
     "cssnano": "^7.1.1",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-vue": "^10.5.1",
+    "gh-pages": "^6.3.0",
     "gradient-string": "^3.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
