@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]        # ← 主分支名，master 的话改成 master
+    branches: [Github-Pages]        # ← 主分支名，master 的话改成 master
   workflow_dispatch:
 
 permissions:
